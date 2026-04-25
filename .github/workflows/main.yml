@@ -1,0 +1,23 @@
+name: Docker Build CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build backend1
+        run: docker build -t backend1 ./apache1
+
+      - name: Build backend2
+        run: docker build -t backend2 ./apache2
+
+      - name: Validate compose
+        run: docker-compose config
