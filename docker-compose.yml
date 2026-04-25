@@ -1,0 +1,23 @@
+services:
+  nginx:
+    image: nginx
+    container_name: compose-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - apache1
+      - apache2
+
+  apache1:
+    image: httpd
+    container_name: compose-apache1
+    volumes:
+      - ./apache1:/usr/local/apache2/htdocs
+
+  apache2:
+    image: httpd
+    container_name: compose-apache2
+    volumes:
+      - ./apache2:/usr/local/apache2/htdocs
